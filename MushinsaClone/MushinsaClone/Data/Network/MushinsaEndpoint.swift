@@ -1,5 +1,5 @@
 //
-//  Mushinsa.swift
+//  MushinsaEndpoint.swift
 //  MushinsaClone
 //
 //  Created by YEONGJIN JANG on 2023/01/10.
@@ -7,19 +7,28 @@
 
 import Foundation
 
-enum Mushinsa {
+enum MushinsaEndpoint {
     case main
+    case photo(url: String)
 }
 
-extension Mushinsa :Resource {
+extension MushinsaEndpoint :Resource {
+    
     var baseURL: URL {
-        return URL(string: "https://meta.musinsa.com/interview")!
+        switch self {
+        case .main:
+            return URL(string: "https://meta.musinsa.com/interview")!
+        case .photo(url: let url):
+            return URL(string: url)!
+        }
     }
     
     var endpoint: Endpoint {
         switch self {
         case .main:
             return .get(path: "/list.json")
+        case .photo:
+            return .get(path: "")
         }
     }
     

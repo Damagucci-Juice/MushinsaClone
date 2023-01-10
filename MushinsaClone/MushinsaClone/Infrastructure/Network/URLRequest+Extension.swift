@@ -11,8 +11,6 @@ internal extension URLRequest {
     init(resource: Resource) {
         var url = resource.baseURL.appendingPathComponent(resource.endpoint.path)
         
-        
-
         if case let .requestWithParameters(parameters, encoding) = resource.task, (encoding.destination ?? resource.endpoint.defaultParamDestination) == .urlQuery {
             url = url.appendingQueryParameters(parameters, encoding: encoding)
         }
