@@ -10,5 +10,5 @@ import Foundation
 protocol ItemPageRepository {
     @discardableResult
     func fetchItemPage(cached: @escaping (ItemPage) -> Void,
-                       completion: @escaping (Result<ItemPage, Error>) -> Void) -> Cancellable?
+                       completion: @escaping (Result<ItemsResponseDTO, Error>) -> Void) -> Cancellable?
 }

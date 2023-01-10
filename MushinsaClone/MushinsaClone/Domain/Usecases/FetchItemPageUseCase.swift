@@ -24,7 +24,12 @@ final class DefaultFetchItemPageUseCase: FetchItemPageUseCase {
     func excute(cached: @escaping (ItemPage) -> Void,
                 completion: @escaping (Result<ItemPage, Error>) -> Void) -> Cancellable? {
         return itemPageRepository.fetchItemPage(cached: cached) { result in
-            completion(result)
+            switch result {
+            case .success(let itemPageDTO):
+                completion(.success(itemPageDTO.toDomain()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }
